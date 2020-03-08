@@ -20,4 +20,10 @@ func main() {
 	johnAccount = new(CurrentAccount)
 	johnAccount.customerName = "john"
 	fmt.Println(*johnAccount)
+
+	sylvioAccount2 := CurrentAccount{customerName: "sylvio", branchNo: "0001", accountNo: "12345", balance: 100.01}
+	fmt.Println(sylvioAccount2)
+
+	// compare two accounts with same values
+	fmt.Println(sylvioAccount == sylvioAccount2)
 }
