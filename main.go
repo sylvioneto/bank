@@ -12,38 +12,29 @@ type CurrentAccount struct {
 }
 
 func main() {
+	fmt.Println("Accounts:")
 	sylvioAccount := CurrentAccount{customerName: "sylvio", branchNo: "0001", accountNo: "12345", balance: 100.01}
 	fmt.Println(sylvioAccount)
 
-	err := sylvioAccount.Withdraw(50)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(sylvioAccount)
+	sylvioAccount2 := CurrentAccount{customerName: "sylvio", branchNo: "0001", accountNo: "22222", balance: 200.01}
+	fmt.Println(sylvioAccount2)
 
-	err = sylvioAccount.Withdraw(100)
+	fmt.Println("Test Case 1: transfer sufficient funds")
+	err := sylvioAccount.FundsTransfer(50, &sylvioAccount2)
 	if err != nil {
 		fmt.Println(err)
 	}
 	fmt.Println(sylvioAccount)
+	fmt.Println(sylvioAccount2)
 
-	err = sylvioAccount.Withdraw(-50)
+	fmt.Println("Test Case 2: transfer insufficient funds")
+	err = sylvioAccount.FundsTransfer(1000, &sylvioAccount2)
 	if err != nil {
 		fmt.Println(err)
 	}
 	fmt.Println(sylvioAccount)
+	fmt.Println(sylvioAccount2)
 
-	err = sylvioAccount.Deposit(-50)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(sylvioAccount)
-
-	err = sylvioAccount.Deposit(100)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(sylvioAccount)
 }
 
 // Withdraw validates balance and updates it
@@ -63,9 +54,23 @@ func (c *CurrentAccount) Deposit(amount float64) error {
 	var err error
 	if amount > 0 {
 		c.balance += amount
-		fmt.Println("New balance is", c.balance)
 	} else {
 		err = fmt.Errorf("Invalid deposit amount: %.2f", amount)
+	}
+	return err
+}
+
+// FundsTransfer transfer funds from source to target account
+func (c *CurrentAccount) FundsTransfer(amount float64, targetAcc *CurrentAccount) error {
+	var err error
+	if amount > 0 {
+		err = c.Withdraw(amount)
+	} else {
+		err = fmt.Errorf("Invalid transfer amount %.2f", amount)
+	}
+
+	if err == nil {
+		err = targetAcc.Deposit(amount)
 	}
 	return err
 }
