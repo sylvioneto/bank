@@ -19,7 +19,7 @@ func main() {
 	sylvioAccount2 := CurrentAccount{customerName: "sylvio", branchNo: "0001", accountNo: "22222", balance: 200.01}
 	fmt.Println(sylvioAccount2)
 
-	fmt.Println("Test Case 1: transfer sufficient funds")
+	fmt.Println("Test Case 1: transfer with sufficient funds")
 	err := sylvioAccount.FundsTransfer(50, &sylvioAccount2)
 	if err != nil {
 		fmt.Println(err)
@@ -27,7 +27,7 @@ func main() {
 	fmt.Println(sylvioAccount)
 	fmt.Println(sylvioAccount2)
 
-	fmt.Println("Test Case 2: transfer insufficient funds")
+	fmt.Println("Test Case 2: transfer insufficient balance")
 	err = sylvioAccount.FundsTransfer(1000, &sylvioAccount2)
 	if err != nil {
 		fmt.Println(err)
@@ -35,17 +35,29 @@ func main() {
 	fmt.Println(sylvioAccount)
 	fmt.Println(sylvioAccount2)
 
+	fmt.Println("Test Case 3: invalid amount")
+	err = sylvioAccount.FundsTransfer(-1, &sylvioAccount2)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(sylvioAccount)
+	fmt.Println(sylvioAccount2)
 }
 
 // Withdraw validates balance and updates it
 func (c *CurrentAccount) Withdraw(amount float64) error {
 	var err error
-	hasBalance := c.balance >= amount && amount > 0
-	if hasBalance {
-		c.balance -= amount
-	} else {
-		err = fmt.Errorf("Insuficient balance: %.2f, or Invalid amount %.2f", c.balance, amount)
+
+	if amount <= 0 {
+		err = fmt.Errorf("Invalid amount: %.2f", c.balance)
+	} else if c.balance <= amount {
+		err = fmt.Errorf("Insuficient balance: %.2f", c.balance)
 	}
+
+	if err == nil {
+		c.balance -= amount
+	}
+
 	return err
 }
 
