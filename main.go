@@ -14,34 +14,32 @@ type CurrentAccount struct {
 func main() {
 	fmt.Println("Accounts:")
 	sylvioAccount := CurrentAccount{customerName: "sylvio", branchNo: "0001", accountNo: "12345", balance: 100.01}
-	fmt.Println(sylvioAccount)
-
 	sylvioAccount2 := CurrentAccount{customerName: "sylvio", branchNo: "0001", accountNo: "22222", balance: 200.01}
-	fmt.Println(sylvioAccount2)
+	fmt.Println(sylvioAccount, sylvioAccount2)
 
 	fmt.Println("Test Case 1: transfer with sufficient funds")
 	err := sylvioAccount.FundsTransfer(50, &sylvioAccount2)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(sylvioAccount)
-	fmt.Println(sylvioAccount2)
+	fmt.Println(sylvioAccount, sylvioAccount2)
+	fmt.Println("-------------------------------------------")
 
 	fmt.Println("Test Case 2: transfer insufficient balance")
 	err = sylvioAccount.FundsTransfer(1000, &sylvioAccount2)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(sylvioAccount)
-	fmt.Println(sylvioAccount2)
+	fmt.Println(sylvioAccount, sylvioAccount2)
+	fmt.Println("-------------------------------------------")
 
 	fmt.Println("Test Case 3: invalid amount")
 	err = sylvioAccount.FundsTransfer(-1, &sylvioAccount2)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(sylvioAccount)
-	fmt.Println(sylvioAccount2)
+	fmt.Println(sylvioAccount, sylvioAccount2)
+	fmt.Println("-------------------------------------------")
 }
 
 // Withdraw validates balance and updates it
