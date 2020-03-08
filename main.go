@@ -15,4 +15,9 @@ func main() {
 
 	netoAccount := CurrentAccount{"neto", "0001", "6789", 200.02}
 	fmt.Println(netoAccount)
+
+	var johnAccount *CurrentAccount
+	johnAccount = new(CurrentAccount)
+	johnAccount.customerName = "john"
+	fmt.Println(*johnAccount)
 }
