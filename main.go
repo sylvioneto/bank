@@ -12,10 +12,11 @@ type CurrentAccount struct {
 }
 
 func main() {
-	fmt.Println("Accounts:")
+	fmt.Println("Accounts created for testing")
 	sylvioAccount := CurrentAccount{customerName: "sylvio", branchNo: "0001", accountNo: "12345", balance: 100.01}
 	sylvioAccount2 := CurrentAccount{customerName: "sylvio", branchNo: "0001", accountNo: "22222", balance: 200.01}
 	fmt.Println(sylvioAccount, sylvioAccount2)
+	fmt.Println("-------------------------------------------")
 
 	fmt.Println("Test Case 1: transfer with sufficient funds")
 	err := sylvioAccount.FundsTransfer(50, &sylvioAccount2)
@@ -45,7 +46,7 @@ func main() {
 // Withdraw validates balance and updates it
 func (c *CurrentAccount) Withdraw(amount float64) error {
 	var err error
-
+	fmt.Printf("Withdraw amount: %.2f \n", amount)
 	if amount <= 0 {
 		err = fmt.Errorf("Invalid amount: %.2f", c.balance)
 	} else if c.balance <= amount {
@@ -62,6 +63,7 @@ func (c *CurrentAccount) Withdraw(amount float64) error {
 // Deposit validates amount and updates the deposit
 func (c *CurrentAccount) Deposit(amount float64) error {
 	var err error
+	fmt.Printf("Deposit amount: %.2f \n", amount)
 	if amount > 0 {
 		c.balance += amount
 	} else {
