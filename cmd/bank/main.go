@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"com.sylvioneto.bank/accounts"
+	"com.sylvioneto.bank/pkg/accounts"
 )
 
 func main() {
