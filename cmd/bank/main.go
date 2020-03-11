@@ -4,12 +4,16 @@ import (
 	"fmt"
 
 	"com.sylvioneto.bank/pkg/accounts"
+	"com.sylvioneto.bank/pkg/customers"
 )
 
 func main() {
 	fmt.Println("Accounts created for testing")
-	sylvioAccount := accounts.CurrentAccount{CustomerName: "sylvio", BranchNo: "0001", AccountNo: "12345", Balance: 100.01}
-	sylvioAccount2 := accounts.CurrentAccount{CustomerName: "sylvio", BranchNo: "0001", AccountNo: "22222", Balance: 200.01}
+	sylvioCustomer := customers.Individual{Name: "sylvio", Id: 11}
+	sylvioAccount := accounts.CurrentAccount{Customer: sylvioCustomer, BranchNo: "0001", AccountNo: "12345"}
+	sylvioAccount2 := accounts.CurrentAccount{Customer: sylvioCustomer, BranchNo: "0001", AccountNo: "22222"}
+	sylvioAccount.Deposit(100)
+	sylvioAccount2.Deposit(200)
 	fmt.Println(sylvioAccount, sylvioAccount2)
 	fmt.Println("-------------------------------------------")
 
@@ -35,5 +39,9 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println(sylvioAccount, sylvioAccount2)
+	fmt.Println("-------------------------------------------")
+
+	fmt.Println("Test Case 4: Print balance")
+	fmt.Println(sylvioAccount.GetBalance(), sylvioAccount2.GetBalance())
 	fmt.Println("-------------------------------------------")
 }
