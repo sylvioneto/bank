@@ -12,6 +12,7 @@ type SavingsAccount struct {
 	balance   float64
 }
 
+
 // Withdraw validates balance and updates it
 func (c *SavingsAccount) Withdraw(amount float64) error {
 	var err error

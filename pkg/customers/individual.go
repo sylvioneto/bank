@@ -4,5 +4,5 @@ type Individual struct {
 	Name        string
 	Id          int
 	Email       string
-	homeAddress string
+	HomeAddress string
 }
