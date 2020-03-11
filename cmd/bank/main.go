@@ -9,39 +9,46 @@ import (
 
 func main() {
 	fmt.Println("Accounts created for testing")
-	sylvioCustomer := customers.Individual{Name: "sylvio", Id: 11}
-	sylvioAccount := accounts.CurrentAccount{Customer: sylvioCustomer, BranchNo: "0001", AccountNo: "12345"}
-	sylvioAccount2 := accounts.CurrentAccount{Customer: sylvioCustomer, BranchNo: "0001", AccountNo: "22222"}
-	sylvioAccount.Deposit(100)
-	sylvioAccount2.Deposit(200)
-	fmt.Println(sylvioAccount, sylvioAccount2)
+	customer := customers.Individual{Name: "sylvio", Id: 11}
+	account := accounts.CurrentAccount{Customer: customer, BranchNo: "0001", AccountNo: "12345"}
+	account2 := accounts.CurrentAccount{Customer: customer, BranchNo: "0001", AccountNo: "22222"}
+	account.Deposit(100)
+	account2.Deposit(200)
+	fmt.Println(account, account2)
 	fmt.Println("-------------------------------------------")
 
 	fmt.Println("Test Case 1: transfer with sufficient funds")
-	err := sylvioAccount.FundsTransfer(50, &sylvioAccount2)
+	err := account.FundsTransfer(50, &account2)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(sylvioAccount, sylvioAccount2)
+	fmt.Println(account, account2)
 	fmt.Println("-------------------------------------------")
 
 	fmt.Println("Test Case 2: transfer insufficient Balance")
-	err = sylvioAccount.FundsTransfer(1000, &sylvioAccount2)
+	err = account.FundsTransfer(1000, &account2)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(sylvioAccount, sylvioAccount2)
+	fmt.Println(account, account2)
 	fmt.Println("-------------------------------------------")
 
 	fmt.Println("Test Case 3: invalid amount")
-	err = sylvioAccount.FundsTransfer(-1, &sylvioAccount2)
+	err = account.FundsTransfer(-1, &account2)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(sylvioAccount, sylvioAccount2)
+	fmt.Println(account, account2)
 	fmt.Println("-------------------------------------------")
 
 	fmt.Println("Test Case 4: Print balance")
-	fmt.Println(sylvioAccount.GetBalance(), sylvioAccount2.GetBalance())
+	fmt.Println(account.GetBalance(), account2.GetBalance())
 	fmt.Println("-------------------------------------------")
+
+	fmt.Println("Test Case 5: Create a Savings Accounts")
+	savings := accounts.SavingsAccount{}
+	savings.Deposit(200)
+	fmt.Println(savings)
+	fmt.Println("-------------------------------------------")
+
 }
