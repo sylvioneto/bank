@@ -1,7 +1,7 @@
 package accounts
 
 import (
-	"com.sylvioneto.bank/pkg/customers"
+	"github.com/sylvioneto/bank/pkg/customers"
 	"fmt"
 )
 

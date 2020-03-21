@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"com.sylvioneto.bank/pkg/accounts"
-	"com.sylvioneto.bank/pkg/customers"
+	"github.com/sylvioneto/bank/pkg/accounts"
+	"github.com/sylvioneto/bank/pkg/customers"
 )
 
 // accountInterface is a interface to pay bills with Current and Savings accounts

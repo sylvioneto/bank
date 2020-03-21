@@ -1,3 +1,3 @@
-module com.sylvioneto.bank
+module github.com/sylvioneto/bank
 
 go 1.14
